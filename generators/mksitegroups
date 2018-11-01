@@ -1,0 +1,88 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use Dbconnect;
+
+
+# we'll add this offset to all gids from the database to avoid clashes later
+# and to disable non-kerberised NFS:-)
+our $gidoffset = 0;	# was 2000
+
+
+sub get_membership ($)
+{
+    my( $dbh ) = @_;
+
+    my $dbsgroup = $dbh->selectall_arrayref(
+	'select groupname,login AS username from v_groups_supp ' );
+    my $r = {};
+    foreach my $g (@$dbsgroup)
+    {
+        my( $group, $user ) = @$g;
+        my $aref = ($r->{$group} //= []);
+        push @$aref, $user;
+    }
+    return $r;
+}
+
+
+#
+# sitegroups( $dbh, $outfile );
+#	Produce $outfile, the site-groups CSV file, for all groups in
+#	the CSG admin database groups table (and their members in the
+#	extra_groups table).
+#
+sub sitegroups ($$)
+{
+	my( $dbh, $outfile ) = @_;
+
+	my $groups = $dbh->selectall_arrayref(
+		'select groupname,gid from v_grouplist order by gid' );
+	my $gmembers = get_membership( $dbh );
+
+	my $n = @$groups;
+
+	print "found $n groups\n";
+
+	my $outfh;
+	die "Can't create $outfile\n" unless open( $outfh, '>', $outfile );
+
+	my %seenid;
+	my %seenname;
+
+	print $outfh "groupname,gid,members\n";
+	foreach my $g (@$groups)
+	{
+		my( $groupname, $gid ) = @$g;
+		$gid += $gidoffset;
+
+		if( $seenid{$gid} )
+		{
+			warn "duplicate group id $gid (name $groupname, prev name $seenid{$gid} - skipping\n";
+			next;
+		}
+		$seenid{$gid} = $groupname;
+		if( $seenname{$gid} )
+		{
+			warn "duplicate group name $groupname (gid $gid, prev gid $seenname{$groupname} - skipping\n";
+			next;
+		}
+		$seenname{$groupname} = $gid;
+		my @members;
+		my $aref = $gmembers->{$groupname};
+		@members = @$aref if $aref;
+		my $members = join(',', @members);
+		print $outfh "$groupname,$gid,$members\n";
+	}
+	close( $outfh );
+}
+
+my $dbh = dbconnect();
+
+sitegroups( $dbh, "../users/site-groups" );
+
+$dbh->disconnect();
+
+exit 0;

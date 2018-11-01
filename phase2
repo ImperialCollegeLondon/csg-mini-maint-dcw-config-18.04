@@ -1,0 +1,84 @@
+lockdir			/var/lock/minimaint
+rundir			/var/run/minimaint
+hostclass:source	file:hostclass
+hostclass:file		/var/lib/maint/hostclass
+safefile:triggers	safe_file_triggers.json
+domain			doc.ic.ac.uk
+
+# maint dist: where to distribute to, can be a temp dir for debugging
+dist:root		/
+
+# maint aptitude: where are the pkglists?
+aptitude:packagelists		pkglists
+aptitude:sitecheck		site/aptcheck
+
+# user accounts information
+users:users			file:users/site-users
+users:groups			file:users/site-groups
+users:requiredgroups		users/required-groups
+users:requiredrootusers		users/required-root-users
+#users:passwdfilename		/tmp/passwd
+#users:groupfilename		/tmp/group
+#users:autohomesfilename	/tmp/auto.homes
+users:maxgroups			16
+# when generating uids and gids from site-users and groups, add these
+# offsets (default: 0) to avoid clashing uids and gids
+#users:uidoffset			1900
+#users:gidoffset			1900
+#users:sysuidmax			1100
+#users:sysgidmax			1100
+users:overrideshellclass	OVERRIDESHELL
+users:overrideshelldir		users/overrideshell
+
+autovol:source			file:auto.vol
+
+kerberos:realm			DOC.IC.AC.UK
+kerberos:users_root		file:kerberos/users_root
+kerberos:stopclasses		file:kerberos/stopclasses
+kerberos:ktd_server		kerberos.doc.ic.ac.uk
+kerberos:ktd_port		760
+
+# maint scripts.. when to run, on where
+# ones to run everywhere, ie. on ALLHOSTS
+hello:runwhen		cron-60m
+hello:runon		ALLHOSTS
+goodbye:runwhen		cron-15m
+goodbye:runon		ALLHOSTS
+dist:runwhen		boot,install,cron-15m
+dist:runon		ALLHOSTS
+aptitude:runwhen	boot,install,cron-15m
+aptitude:runon		ALLHOSTS
+locales:runwhen		boot,install,cron-15m
+locales:runon		ALLHOSTS
+alternatives:runwhen	install,cron-60m
+alternatives:runon	ALLHOSTS
+video:runwhen		boot,install,cron-60m
+video:runon		ALLHOSTS
+hosts:runwhen		boot,install,cron-60m
+hosts:runon		ALLHOSTS
+hosts:vitalhosts	tokaimura,thoth,shikra,besra,co331,co220
+javaalternatives:runwhen boot,install,cron-60m
+javaalternatives:runon	ALLHOSTS
+gconf:runwhen		boot,install,cron-15m
+gconf:runon		ALLHOSTS
+
+# ones to run only on DOCHOSTS, or subsets of those
+useraccounts:runwhen	boot,install,cron-15m
+useraccounts:runon	DOCHOSTS
+autovol:runwhen		boot,install,cron-15m
+autovol:runon		DOCHOSTS
+kerberos:runwhen	boot,install,cron-15m
+kerberos:runon		DOCHOSTS
+killLRP:runwhen		cron-60m
+killLRP:runon		SHELLSERVER
+killLRP:msg		killLRP/msg
+killLRP:domain		imperial.ac.uk
+killLRP:prohibited	MATLAB,java,dropbox,qemu,sicstus,javac,yap,ruby
+killLRP:duration	60
+perms:runwhen		boot,install,cron-30m
+perms:runon		DOCHOSTS
+#nb also look in	perms/data
+upstart:runwhen		boot,install,cron-15m
+upstart:runon		DOCHOSTS
+upstart:disable		ureadahead,ureadahead-other,apport,plymouth-stop
+

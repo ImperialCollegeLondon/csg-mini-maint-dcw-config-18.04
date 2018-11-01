@@ -1,0 +1,11 @@
+appletviewer           /usr/lib/jvm/java-8-openjdk-amd64/bin/appletviewer
+javac                  /usr/lib/jvm/java-8-openjdk-amd64/bin/javac
+jar                    /usr/lib/jvm/java-8-openjdk-amd64/bin/jar
+jarsigner              /usr/lib/jvm/java-8-openjdk-amd64/bin/jarsigner
+rmic                   /usr/lib/jvm/java-8-openjdk-amd64/bin/rmic 
+rmid                   /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/rmid
+rmiregistry            /usr/lib/jvm/java-8-openjdk-amd64/bin/rmiregistry
+javadoc                /usr/lib/jvm/java-8-openjdk-amd64/bin/javadoc
+javah                  /usr/lib/jvm/java-8-openjdk-amd64/bin/javah
+native2ascii           /usr/lib/jvm/java-8-openjdk-amd64/bin/native2ascii
+serialver              /usr/lib/jvm/java-8-openjdk-amd64/bin/serialver

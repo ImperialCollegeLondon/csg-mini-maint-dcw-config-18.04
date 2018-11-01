@@ -1,0 +1,16 @@
+apache2
+apache2-dev
+apache2-doc
+apache2-suexec-custom
+libapache2-mod-auth-kerb
+libconfig-any-perl
+libdbd-sqlite3-perl
+libfile-basedir-perl
+libfile-slurp-perl
+libhtml-parser-perl
+libhtml-template-perl
+libhtml-tiny-perl
+libjson-perl
+libjson-xs-perl
+libregexp-common-perl
+libtemplate-perl

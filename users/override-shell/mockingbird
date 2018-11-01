@@ -1,0 +1,2 @@
+safe_groups	csg lab systems
+override_shell	/usr/local/sbin/labranch_shell

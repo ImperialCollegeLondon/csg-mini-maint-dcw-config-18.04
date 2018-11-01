@@ -1,0 +1,109 @@
+# permissions maint script data file
+
+dir         /tmp/.ICE-unix
+perms       01777
+owner	    0
+group       0
+
+dir	    /var/log/exim4
+owner       1313
+group       1313
+
+file	    /var/log/exim4/mainlog
+owner       1313
+group       1313
+
+dir	    /var/spool/exim4
+owner       1313
+group       1313
+
+foreach	    /var/spool/exim4/{db,input,msglog}
+  file
+  owner     1313
+  group     1313
+end
+
+foreach     /var/log/*
+  facl	    g:csg:rX
+end
+
+# ldk: if on SECUREEXAMSERVER, chgrp /var/log/apache2 to jeweladmin
+ifinclass SECUREEXAMSERVER
+  dir   /var/log/apache2
+  owner 0
+  group 209
+end
+
+# [21/02/2013] gmazza & ldk: if on LINSERVERHTTP, chgrp /usr/lib/apache2/suexec to wwwnot (gid 117); DoC does not use www-data group unlike default Ubuntu.
+# Reset owner suexec bit and other attributes following chown.
+
+ifinclass LINSERVERHTTP
+ iffile /usr/lib/apache2/suexec
+  group 117
+  perms 04754
+end
+
+ifdir /var/log/condor
+  owner 450
+  group 100
+end
+
+ifdir /data
+  perms 01777
+  owner 0
+  group 0
+end
+
+# gmazza, mjb04 & ldk:
+# chmod and chown ownership of /var/lib/nfs/ et al appropriately if exists.
+
+ifdir /var/lib/nfs/sm
+  owner statd
+  group 0
+  dir /var/lib/nfs
+  owner statd
+  group 0
+end
+
+ifdir /var/lib/nfs/sm
+  owner statd
+  group 0
+end
+
+foreach /var/lib/nfs/sm/*
+  owner statd
+  group 0
+end
+
+iffile /usr/bin/pmount
+  perms 04755
+end
+
+iffile /usr/bin/pumount
+  perms 04755
+end
+
+
+# Disable the 'webcollage' screensaver, if installed.
+# (It downloads random images from the Internet and displays them.
+#  Which, given some of the images on the Internet, can be Bad.)
+
+iffile /usr/lib/xscreensaver/webcollage
+  perms 0
+end
+
+
+# Remove the world-executable bit from /usr/bin/X -- otherwise, end-users
+# can spawn additional X servers on local terminals, which -- at best --
+# creates confusion.
+ifinclass LAB
+ iffile /usr/bin/X
+  perms 06754
+end
+
+# Ensure /var/lexis exists on lab machines
+ifinclass   LAB
+  dir         /var/lexis
+  perms       0775
+  group       100
+end

@@ -1,0 +1,59 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use Dbconnect;
+
+
+#
+# my %siteuser = read_siteusers( $dbh );
+#	Read the site users and form a set of all valid site users.
+#
+sub read_siteusers
+{
+	my( $dbh ) = @_;
+
+	my $users = $dbh->selectall_arrayref('select username from v_user_accounts where not disabled');
+
+	my %set = map { $_->[0] => 1 } @$users;
+	return %set;
+}
+
+
+#
+# producefile( $dbh, $outfile, $siteusers );
+#	Produce $outfile, the users-root CSV file, for all entries in
+#	the CSG admin database users_root table that are current siteusers.
+#	%$siteusers is a set of all current siteusers to use to check.
+#
+sub producefile ($$$)
+{
+	my( $dbh, $outfile, $siteusers ) = @_;
+
+	my $users = $dbh->selectall_arrayref("select class,username from users_root where not disabled and (expires is null or expires > 'now') order by class,username");
+	my $n = @$users;
+
+	print "found $n non-expired root users\n";
+
+	open( my $outfh, '>', $outfile ) || die "Can't create $outfile\n";
+
+	print $outfh "class,username\n";
+	foreach my $u (@$users)
+	{
+		my( $class, $username ) = @$u;
+		$class = "DOCHOSTS" if $class eq "HOSTDOC";
+		print $outfh "$class,$username\n" if $siteusers->{$username};
+	}
+	close( $outfh );
+}
+
+my $dbh = dbconnect();
+
+my %siteuser = read_siteusers( $dbh );
+
+producefile( $dbh, "../kerberos/users_root", \%siteuser );
+
+$dbh->disconnect();
+
+exit 0;

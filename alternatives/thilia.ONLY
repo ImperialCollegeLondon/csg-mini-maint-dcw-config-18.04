@@ -1,0 +1,8 @@
+ctags				/usr/bin/ctags.emacs24
+kdesu				/usr/lib/kde4/libexec/kdesu-distrib/kdesu
+libgksu-gconf-defaults		/usr/share/libgksu/debian/gconf-defaults.libgksu-su
+mailx				/usr/bin/bsd-mailx
+mpi				/usr/include/mpich
+mpirun				/usr/bin/mpirun.mpich
+prolog				/usr/bin/sicstus
+x-terminal-emulator		/usr/bin/terminator

@@ -1,0 +1,70 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use Dbconnect;
+
+
+# we'll add this offset to all uids from the database to avoid clashes later
+# and to disable non-kerberised NFS:-)
+our $uidoffset = 0;	# was 2000;
+
+# we'll add this offset to all gids from the database to avoid clashes later
+# and to disable non-kerberised NFS:-)
+our $gidoffset = 0;	# was 2000;
+
+#
+# siteusers( $dbh, $outfile );
+#	Produce $outfile, the site-users CSV file, for all users in
+#	the CSG admin database users table.
+#
+sub siteusers ($$)
+{
+	my( $dbh, $outfile ) = @_;
+
+	my $users = $dbh->selectall_arrayref('select username,uid,gid,gecos,homedirlocal,shell,homedirremoteserver,homedirremotepath,disabled from v_user_accounts order by username');
+	my $n = @$users;
+
+	print "found $n users\n";
+
+	my $outfh;
+	die "Can't create $outfile\n" unless open( $outfh, '>', $outfile );
+
+	my %seenid;
+	my %seenname;
+
+	print $outfh "username,uid,gid,gecos,home,shell,rhomedirserver,rhomepath,disabled\n";
+	foreach my $u (@$users)
+	{
+		my( $uname, $uid, $gid, $gecos, $home, $shell,
+		    $rhomedirserver, $rhomepath, $disabled ) = @$u;
+		$uid += $uidoffset;
+		$gid += $gidoffset;
+		if( $seenid{$uid} )
+		{
+			warn "duplicate user id $uid (username $uname, prev useranme $seenid{$uid} - skipping\n";
+			next;
+		}
+		$seenid{$uid} = $uname;
+		if( $seenname{$uid} )
+		{
+			warn "duplicate user name $uname (uid $uid, prev uid $seenname{$uname} - skipping\n";
+			next;
+		}
+		$seenname{$uname} = $uid;
+		$rhomedirserver //= '';
+		$rhomepath //= '';
+		$gecos //= '';
+		print $outfh "$uname:$uid:$gid:$gecos:$home:$shell:$rhomedirserver:$rhomepath:$disabled\n";
+	}
+	close( $outfh );
+}
+
+my $dbh = dbconnect();
+
+siteusers( $dbh, "../users/site-users" );
+
+$dbh->disconnect();
+
+exit 0;

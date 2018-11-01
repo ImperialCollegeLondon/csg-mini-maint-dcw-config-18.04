@@ -1,0 +1,161 @@
+# copied from /vol/csg/public/share/autofs/auto.vol
+#
+# Core data areas
+#
+
+acm		-defaults,nfsvers=3,udp,hard,intr		fs-vol-acm:/export/vol/acm
+admissions	-defaults,nfsvers=3,udp,hard,intr		fs-vol-admissions:/export/vol/admissions
+aese		-defaults,nfsvers=3,udp,hard,intr		fs-vol-aese:/export/vol/aese
+agentcities	-defaults,nfsvers=3,udp,hard,intr		fs-vol-agentcities:/export/vol/agentcities
+ak6309-tmp	-defaults,tcp,hard,intr		                fs-vol-ak6309-tmp:/export/vol/ak6309-tmp
+algorithms	-defaults,tcp,soft,intr		                fs-vol-algorithms.doc.ic.ac.uk.:/export/vol/algorithms
+android-studio	-defaults,tcp,hard,intr                         fs-vol-android-sdk.doc.ic.ac.uk:/export/vol/matlab/android-studio	
+apt		-defaults,tcp,soft,intr		                fs-vol-apt.doc.ic.ac.uk.:/export/vol/apt
+archive		-defaults,tcp,hard,intr				fs-vol-archive:/export/vol/archive
+astute		-defaults,tcp,hard,intr				fs-vol-astute:/export/vol/astute
+atlas		-defaults,nfsvers=3,udp,hard,intr		fs-vol-atlas:/export/vol/atlas
+construct3dmm	-defaults,nfsvers=3,udp,hard,intr		fs-vol-atlas:/export/vol/construct3dmm
+automed		-defaults,tcp,hard,intr		fs-vol-automed:/export/vol/automed
+biobank		-defaults,tcp,hard,intr		fs-vol-biobank:/export/biobank
+biomedic	-defaults,tcp,hard,intr		fs-vol-biomedic:/export/vol/biomedic
+biomedic2	-defaults,tcp,hard,intr		fs-vol-biomedic2:/export/vol/biomedic2
+biomedic-www	-defaults,nfsvers=3,udp,hard,intr		fs-vol-biomedic-www:/export/vol/biomedic-www
+bitbucket	-defaults,nfsvers=3,nfsvers=3,udp,hard,intr		fs-vol-bitbucket:/export/vol/bitbucket
+bubbles		-defaults,tcp,hard,intr		fs-vol-bubbles:/export/vol/bubbles
+careers		-defaults,tcp,hard,intr		fs-vol-careers:/export/vol/careers
+carp		-defaults,tcp,hard,intr		fs-vol-carp:/export/vol/carp
+cate		-defaults,tcp,hard,intr		fs-vol-cate:/export/vol/cate
+cc		-defaults,tcp,hard,intr		fs-vol-cc:/export/vol/cc
+ccg		-defaults,tcp,hard,intr		fs-vol-ccg:/export/vol/ccg
+clahrc		-defaults,tcp,hard,intr		fs-vol-clahrc:/export/vol/clahrc
+cms		-defaults,tcp,hard,intr		fs-vol-cms:/export/vol/cms
+cogrob		-defaults,tcp,hard,intr		fs-vol-cogrob:/export/vol/cogrob
+codimo		-defaults,tcp,hard,intr		fs-vol-codimo:/export/vol/codimo
+comp-bio	-defaults,nfsvers=3,udp,hard,intr		fs-vol-compbio:/export/vol/comp-bio
+condor		-defaults,tcp,hard,intr		fs-vol-condor:/export/vol/condor
+costa-tmp	-defaults,tcp,hard,intr		fs-vol-costa-tmp:/export/vol/costa-tmp
+cruk		-defaults,nfsvers=3,udp,hard,intr		fs-vol-cruk:/export/vol/cruk
+crypto		-defaults,nfsvers=3,udp,hard,intr		fs-vol-crypto:/export/vol/crypto
+cuda		-defaults,nfsvers=3,udp,hard,intr		fs-vol-cuda:/export/vol/cuda
+csg		-defaults,tcp,hard,intr		fs-vol-csg:/export/vol/csg
+ddo		-defaults,tcp,hard,intr				fs-vol-ddo:/export/vol/ddo
+deptadmin	-defaults,tcp,hard,intr		fs-vol-deptadmin:/export/vol/deptadmin
+dhcp-derived-data       	-defaults,tcp,hard,intr         fs-vol-dhcp-derived-data:/export/dhcp/derived_data
+dhcp-raw-data                   -defaults,tcp,hard,intr         fs-vol-dhcp-raw_data:/export/dhcp/raw_data
+dhcp-reconstructed-images       -defaults,tcp,hard,intr         fs-vol-dhcp-reconstructed-images:/export/dhcp/reconstructed_images
+dhcp-hcp-data                   -defaults,tcp,hard,intr         fs-vol-dhcp-hcp-data:/export/hcp
+dhcp-results                    -defaults,tcp,hard,intr          fs-vol-dhcp-results:/export/dhcp/results
+dk3810-tmp	-defaults,tcp,hard,intr		fs-vol-dk3810-tmp:/export/vol/dk3810-tmp
+dlt10-tmp	-defaults,tcp,hard,intr		fs-vol-dlt10-tmp:/export/vol/dlt10-tmp
+dse		-defaults,tcp,hard,intr		fs-vol-dse:/export/vol/dse
+dsg		-defaults,tcp,hard,intr		fs-vol-dsg:/export/vol/dsg
+dyson-robot-lab		-defaults,tcp,hard,intr		fs-vol-dyson-robot-lab:/export/vol/dyson-robot-lab
+emote		-defaults,nfsvers=3,udp,hard,intr		fs-vol-emote:/export/vol/emote
+epps		-defaults,tcp,hard,intr		fs-vol-epps:/export/vol/epps
+exams		-defaults,tcp,hard,intr		fs-vol-exams:/export/vol/exams
+fswp		-defaults,tcp,hard,intr		fs-vol-fswp:/export/vol/fswp
+gcasale-tmp	-defaults,tcp,hard,intr		fs-vol-gcasale-tmp:/export/vol/gcasale-tmp
+glam		-defaults,tcp,hard,intr		fs-vol-glam:/export/vol/glam
+grail		-defaults,tcp,hard,intr		fs-vol-grail:/export/vol/grail
+gpudata		-defaults,tcp,hard,intr		fs-vol-gpudata(10),192.168.1.252(1):/export/vol/gpudata
+hci2		-defaults,tcp,hard,intr		fs-vol-hci2:/export/vol/hci2
+hercules	-defaults,tcp,hard,intr		fs-vol-hercules:/export/vol/hercules
+hmi		-defaults,tcp,hard,intr		fs-vol-hmi:/export/vol/hmi
+ibe-san1	-defaults,tcp,hard,intr		fs-vol-ibe-san1:/export/vol/ibe-san1
+ibe-san2	-defaults,tcp,hard,intr		fs-vol-ibe-san2:/export/vol/ibe-san2
+ibe-san3	-defaults,tcp,hard,intr		fs-vol-ibe-san3:/export/vol/ibe-san3
+ibe-san4	-defaults,tcp,hard,intr		fs-vol-ibe-san4:/export/vol/ibe-san4
+ibe-san5	-defaults,tcp,hard,intr		fs-vol-ibe-san5:/export/vol/ibe-san5
+ibe-san6	-defaults,tcp,hard,intr		fs-vol-ibe-san6:/export/vol/ibe-san6
+iccsw		-defaults,tcp,hard,intr		fs-vol-iccsw:/export/vol/iccsw
+industrialliaison		-defaults,tcp,hard,intr		fs-vol-industrialliaison:/export/vol/industrialliaison
+intel		-defaults,tcp,hard,intr	        fs-vol-intel-compiler.doc.ic.ac.uk:/export/vol/matlab/intel	
+# destroy 1st jan 2014
+jliu4-tmp	-defaults,tcp,hard,intr		fs-vol-jliu4-tmp:/export/vol/jliu4-tmp
+kn910-data	-defaults,tcp,hard,intr		fs-vol-kn910-data:/export/vol/kn910-data
+lab		-defaults,tcp,hard,intr		fs-vol-lab:/export/vol/lab
+#DCW never used labranch	-defaults,tcp,hard,intr		fs-vol-labranch:/export/vol/labranch
+labsrc		-defaults,tcp,hard,intr		fs-vol-labsrc:/export/vol/labsrc
+lectapt		-defaults,tcp,hard,intr		fs-vol-lectapt:/export/vol/lectapt
+lesc		-defaults,tcp,hard,intr		fs-vol-lesc:/export/vol/lesc
+lescrepo	-defaults,nfsvers=3,udp,hard,intr		fs-vol-lescrepo:/export/vol/lescrepo
+lexis		-defaults,tcp,hard,intr		fs-vol-lexis:/export/vol/lexis
+#DCW deleting this.. lm1015-tmp	-defaults,tcp,hard,intr		fs-vol-lm1015-tmp:/export/vol/lm1015-tmp
+linux		-defaults,tcp,hard,intr		fs-vol-linux:/export/vol/linux
+linux.install	-defaults,tcp,hard,intr		fs-vol-linux-install:/export/vol/linux
+linuxboot	-defaults,tcp,hard,intr		fs-vol-linuxboot:/export/vol/linuxboot
+linuxboot.install -defaults,tcp,hard,intr	fs-vol-linuxboot-install:/export/vol/linuxboot
+lsds		-defaults,tcp,hard,intr		fs-vol-lsds:/export/vol/lsds
+mac		-defaults,tcp,hard,intr		fs-vol-mac:/export/vol/mac
+matlab      	-defaults,tcp,hard,intr		fs-vol-matlab:/export/vol/matlab
+medic01		-defaults,tcp,hard,intr		fs-vol-medic01:/export/vol/medic01
+medic02		-defaults,tcp,hard,intr		fs-vol-medic02:/export/vol/medic02
+mlg		-defaults,nfsvers=3,udp,hard,intr		fs-vol-mlg:/export/vol/mlg
+#DCWretired mlg-temp	-defaults,nfsvers=3,udp,hard,intr		fs-vol-mlg-temp:/export/vol/mlg-temp
+#DCWretired mailtmp		-defaults,tcp,hard,intr		seagull:/export/vol/mailtmp
+#DCW retiredmmis		-defaults,tcp,hard,intr		fs-vol-mmis:/export/vol/mmis
+mscadmissions	-defaults,tcp,hard,intr		fs-vol-mscadmissions:/export/vol/mscadmissions
+mrbs		-defaults,tcp,hard,intr		fs-vol-mrbs:/export/vol/mrbs
+musicir		-defaults,tcp,hard,intr		fs-vol-musicir:/export/vol/musicir
+multicore		-defaults,tcp,hard,intr		fs-vol-multicore:/export/vol/multicore
+mpd37-tmp		-defaults,tcp,hard,intr		fs-vol-mpd37-tmp:/export/vol/mpd37-tmp
+nh910-tmp	-defaults,tcp,hard,intr		fs-vol-nh910-tmp:/export/vol/nh910-tmp
+oldcrap		-defaults,tcp,hard,intr		fs-vol-oldcrap:/export/vol/oldcrap
+openshare		-defaults,tcp,hard,intr		fs-vol-openshare:/export/vol/openshare:
+otrs		-defaults,tcp,hard,intr		fs-vol-otrs:/export/vol/otrs
+paramonos	-defaults,tcp,hard,intr		fs-vol-paramonos:/export/vol/paramonos
+phdadmissions		-defaults,tcp,hard,intr		fs-vol-phdadmissions:/export/vol/phdadmissions
+phoebe		-defaults,tcp,hard,intr		fs-vol-phoebe:/export/vol/phoebe
+#[dwm] DISABLED 2011-12-06
+#pkg-test	-defaults,nfsvers=3,udp,hard,intr		fs-vol-pkg-test:/export/repo
+pp		-defaults,tcp,hard,intr		fs-vol-pp:/export/vol/pp
+project		-defaults,tcp,hard,intr		fs-vol-project:/export/vol/project
+#DCW empty for 4 years!qoi		-defaults,tcp,hard,intr		fs-vol-qoi:/export/vol/qoi
+recover		-defaults,tcp,hard,intr		fs-vol-recover:/export/vol/recover/public
+recover1	-defaults,tcp,hard,intr		fs-vol-recover1:/export/vol/recover/public
+recover2	-defaults,tcp,hard,intr		fs-vol-recover2:/export/vol/recover/public
+recover3	-defaults,tcp,hard,intr		fs-vol-recover3:/export/vol/recover/public
+recovery	-defaults,tcp,hard,intr		fs-vol-recovery:/export/vol/recovery
+repomirror	-defaults,tcp,hard,intr		fs-vol-repomirror:/export/vol/repomirror
+robotvision	-defaults,tcp,hard,intr		fs-vol-robotvision:/export/vol/robotvision
+rr		-defaults,tcp,hard,intr		fs-vol-rr:/export/vol/rr
+sessc		-defaults,tcp,hard,intr		fs-vol-sessc:/export/vol/sessc
+sml		-defaults,tcp,hard,intr		fs-vol-sml:/export/vol/sml
+solaris		-defaults,nfsvers=3,udp,hard,intr		fs-vol-solaris:/export/vol/solaris
+source		-defaults,tcp,hard,intr		fs-vol-source:/export/vol/source
+spo		-defaults,tcp,hard,intr		fs-vol-spo:/export/vol/spo
+srg		-defaults,tcp,hard,intr		fs-vol-srg:/export/vol/srg
+subversion	-defaults,tcp,hard,intr		fs-vol-subversion:/export/vol/subversion
+tsc-casuals	-defaults,tcp,hard,intr		fs-vol-tsc-casuals:/export/vol/tsc-casuals
+#DCW user left, deleting this ty1214-tmp	-defaults,tcp,hard,intr		fs-vol-ty1214-tmp:/export/vol/ty1214-tmp
+universal	-defaults,nfsvers=3,udp,hard,intr		fs-vol-universal:/export/vol/universal
+vip-ixi		-defaults,nfsvers=3,udp,hard,intr		fs-vol-vipdata:/export/vol/vipdata/ixi
+vipcvs		-defaults,tcp,hard,intr		fs-vol-vipdata:/export/vol/vipdata/vipcvs
+vipdata		-defaults,tcp,hard,intr		fs-vol-vipdata:/export/vol/vipdata
+vtk		-defaults,tcp,hard,intr		fs-vol-vtk:/export/vol/vtk
+#DCWwww-old		-defaults,nfsvers=3,udp,hard,intr		fs-vol-www-old:/export/www
+www		-defaults,nfsvers=3,udp,hard,intr		fs-vol-www:/export/vol/www
+www-virtual	-defaults,nfsvers=3,udp,hard,intr         fs-vol-www-virtual:/export/vol/www
+www-virtuallogs	-defaults,nfsvers=3,udp,hard,intr		fs-vol-www-virtual:/export/vol/logs
+wwwvirtual2	-defaults,nfsvers=3,udp,hard,intr         fs-vol-wwwvirtual2:/export/vol/www
+wwwvirtual2logs	-defaults,nfsvers=3,udp,hard,intr		fs-vol-wwwvirtual2:/export/vol/logs
+wwwhomeslogs	-defaults,nfsvers=3,udp,hard,intr		fs-vol-wwwhomes.doc.ic.ac.uk:/export/vol/logs
+# wwwhomes-oldlogs -defaults,nfsvers=3,udp,hard,intr	fs-vol-wwwhomes-old.doc.ic.ac.uk:/export/logs
+wwwlogs		-defaults,nfsvers=3,udp,hard,intr		fs-vol-www:/export/vol/logs
+wordpress	-defaults,nfsvers=3,udp,hard,intr		fs-vol-wordpress:/export/vol/wordpress
+xdpi		-defaults,tcp,hard,intr		fs-vol-xdpi:/export/vol/xdpi
+
+#
+# Aliases (or subdirs of other exports)
+#
+iceni		-defaults,tcp,hard,intr		fs-vol-lesc:/export/vol/lesc
+#DCWsolarisadmin	-defaults,nfsvers=3,udp,hard,intr		fs-vol-solaris:/export/vol/solaris/admin
+#DCWsolaris8	-defaults,nfsvers=3,udp,hard,intr		fs-vol-solaris:/export/vol/solaris/solaris8
+aesop		-defaults,tcp,hard,intr		fs-vol-grail:/export/vol/grail/aesop
+tungsten-ide	-defaults,tcp,hard,intr		fs-vol-grail:/export/vol/grail/aesop/tungsten-ide
+tungsten-scsi	-defaults,tcp,hard,intr		fs-vol-grail:/export/vol/grail/aesop/tungsten-scsi
+
+#
+# Other areas
+#
+#DCWsunsite		-defaults,tcp,hard,intr,ro,rsize=1024,wsize=1024,vers=2		nfs.sunsite.org.uk:/pub

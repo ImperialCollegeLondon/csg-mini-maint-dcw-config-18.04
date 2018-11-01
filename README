@@ -1,0 +1,56 @@
+JUNE 2018
+
+I had a dream..
+
+.. but rather sadly, it was about maint:-)
+
+I wondered if one could pull out a small neat non-DoC specific
+subset of maint out of the 41000 (!) line behemoth it's become,
+and show it to others, talk about it, and use it for DoC purposes
+outside of 146.169..  Let's call it "minimaint".
+
+So I thought I'd play...
+
+The core principles must be:
+
+3 components:
+
+- the source code, /sbin/maint, the libraries and all the maint scripts
+  (reengineered to have NO DoC specific knowledge in them, no use of
+  NFS, rsynclinux.doc.ic.ac.uk, db-admin database etc).  Store this in a
+  public git repo..
+
+- DoC specific config information currently embedded in the code, plus
+  assumptions like "every hostname is in .doc.ic.ac.uk", per-maint script
+  runon and runwhen data, plus per-maint script config data eg. the dist
+  tree, the apt package lists, the database config files etc etc.  Store
+  this in an /etc/minimaint directory, getting it from a separate git repo,
+  not so public, but accessible to DoC machines outside of 146.169:-)
+
+  This directory is one such possible site config dir, and is pushed up to
+  the public git repo:
+  https://github.com/ImperialCollegeLondon/csg-mini-maint-dcw-config.git
+
+- To replace db-admin, needs more thought, on one level this is more DoC
+  specific information, specifically a set of users, groups (and members),
+  and hostclasses.  However, this data changes more rapidly than most config
+  data (that's why it's in a database:-)).  Perhaps hostclasses could
+  permanently leave the database, maybe even users, groups and members.
+  I wondered whether all this data could be downloaded in bulk from a
+  RESTful API, in JSON format. Alternatively, it could be automatically
+  generated (in our case FROM db-admin) as a small number of JSON files
+  every N minutes (say once an hour), automatically added to the config repo
+  and pushed, making it live.
+
+  For now, this config dir contains a hostclass file containing some made up
+  example config info, and now users/site-users.csv and users/site-groups.csv
+  files contain all the real DoC users and groups (these are created by the
+  generators/mksiteusers and mksitegroups utilities from our database).
+
+The basic idea will be to COPY small bits of maint and it's libraries in
+here, separate out the config from the source code, delete as much as
+possible, clean and "refactor" it as much as possible.  Let's see what
+we come up with.
+
+	duncan white
+	June-July 2018
