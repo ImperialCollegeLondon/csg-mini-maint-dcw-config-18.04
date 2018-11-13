@@ -4,53 +4,76 @@ I had a dream..
 
 .. but rather sadly, it was about maint:-)
 
-I wondered if one could pull out a small neat non-DoC specific
-subset of maint out of the 41000 (!) line behemoth it's become,
-and show it to others, talk about it, and use it for DoC purposes
-outside of 146.169..  Let's call it "minimaint".
+See the source code repo for more details, find it in
+https://github.com/ImperialCollegeLondon/csg-mini-maint.git
 
-So I thought I'd play...
+This is the DoC specific config information repo.  It's stored in the public
+git repo:
 
-The core principles must be:
+  https://github.com/ImperialCollegeLondon/csg-mini-maint-dcw-config-18.04.git
 
-3 components:
+Start by reading the files "phase1" - which defines where to find the minimaint
+source repo, and what version of Ubuntu this config repo is intended for - and
+"phase2" - which contains all the rest of the configuration information.
 
-- the source code, /sbin/maint, the libraries and all the maint scripts
-  (reengineered to have NO DoC specific knowledge in them, no use of
-  NFS, rsynclinux.doc.ic.ac.uk, db-admin database etc).  Store this in a
-  public git repo..
+Both files contain key: value facts, and the keys are often hierarchical, as in 
 
-- DoC specific config information currently embedded in the code, plus
-  assumptions like "every hostname is in .doc.ic.ac.uk", per-maint script
-  runon and runwhen data, plus per-maint script config data eg. the dist
-  tree, the apt package lists, the database config files etc etc.  Store
-  this in an /etc/minimaint directory, getting it from a separate git repo,
-  not so public, but accessible to DoC machines outside of 146.169:-)
+hostclass:source	file:hostclass
+hostclass:file		/var/lib/maint/hostclass
 
-  This directory is one such possible site config dir, and is pushed up to
-  the public git repo:
-  https://github.com/ImperialCollegeLondon/csg-mini-maint-dcw-config.git
+The "hostclass:source" fact determines where the SOURCE of all hostclass
+information is.  It's value is "file:hostclass", currently only "file:"
+is supported, and therefore this fact tells minimaint that the source of
+the hostclass information is the file (in this config repo) "hostclass".
 
-- To replace db-admin, needs more thought, on one level this is more DoC
-  specific information, specifically a set of users, groups (and members),
-  and hostclasses.  However, this data changes more rapidly than most config
-  data (that's why it's in a database:-)).  Perhaps hostclasses could
-  permanently leave the database, maybe even users, groups and members.
-  I wondered whether all this data could be downloaded in bulk from a
-  RESTful API, in JSON format. Alternatively, it could be automatically
-  generated (in our case FROM db-admin) as a small number of JSON files
-  every N minutes (say once an hour), automatically added to the config repo
-  and pushed, making it live.
+Similarly, facts such as:
 
-  For now, this config dir contains a hostclass file containing some made up
-  example config info, and now users/site-users.csv and users/site-groups.csv
-  files contain all the real DoC users and groups (these are created by the
-  generators/mksiteusers and mksitegroups utilities from our database).
+aptitude:packagelists		pkglists
 
-The basic idea will be to COPY small bits of maint and it's libraries in
-here, separate out the config from the source code, delete as much as
-possible, clean and "refactor" it as much as possible.  Let's see what
-we come up with.
+are intended only for the aptitude maint script to access.  This fact
+defines the directory (within this config repo) that contains per-hostclass
+package lists.
+
+Later down the phase2 config file, after the custom per-maint script facts,
+you find the standard per-maint script runwhen and runon facts, eg:
+
+aptitude:runwhen	boot,install,cron-15m
+aptitude:runon		ALLHOSTS
+
+This information replaces the runwhen/ and runon/ directories in each maint
+script directory, separated out into the DoC specific config.
+
+Returning to the hostclass file named in the "hostclass:source" fact,
+reading that hostclass file you will see a relatively small number of
+parent,child,priority hostclass records - representing a small made up
+universe.  In particular, the maint hostclass HOSTDOC has been replaced
+by ALLHOSTS, and a new subclass DOCHOSTS has been added which means
+"this host is on 146.169, so can use NFS".  Some maint scripts only run
+on DOCHOSTS.
+
+Turning to useraccounts, and noting that the useraccounts maint script
+only runs on DOCHOSTS, the phase2 config file contains the following facts:
+
+# user accounts information
+users:users			file:users/site-users
+users:groups			file:users/site-groups
+users:requiredgroups		users/required-groups
+users:requiredrootusers		users/required-root-users
+users:maxgroups			16
+users:overrideshellclass	OVERRIDESHELL
+users:overrideshelldir		users/overrideshell
+
+The "users:users" fact tells the useraccounts maint script that the file
+users/site-users (a plain text file, in this config repo) lists all the
+users. in an idealised maximally simplified form.
+
+Similarly, the "users:groups" fact tells maint useraccounts that the file
+users/site-groups lists all the groups, also in simplified form.
+
+As a convenience, the generators/ directory contains local utility
+scripts mksiteusers and mksitegroups, direct from data in our database.
+Umm, these generators shouldn't really be in this repo, as they contain
+a readonly db-admin database password.
 
 	duncan white
 	June-July 2018
