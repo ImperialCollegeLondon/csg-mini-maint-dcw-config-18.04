@@ -14,10 +14,8 @@
 # pam-auth-update(8) for details.
 
 # here are the per-package modules (the "Primary" block)
-# DCW: added 27th Oct 2009 to stop doing kerberos checks for non-existent users
-#DCW ahem auth    [user_unknown=die default=ignore]        pam_unix.so nodelay
 auth    [success=2 default=ignore]      pam_krb5.so realm=IC.AC.UK ignore_root 
-auth    [success=1 default=ignore]      pam_krb5.so realm=DOC.IC.AC.UK use_first_pass ignore_root
+auth    [success=1 default=ignore]      pam_unix.so nullok_secure try_first_pass
 # here's the fallback if no module succeeds
 auth    requisite                       pam_deny.so
 # prime the stack with a positive return value if there isn't one already;
